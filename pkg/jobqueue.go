@@ -22,14 +22,6 @@ func (r *RunQueue) Run(f func()) {
 	<-r.queue
 }
 
-func (r *RunQueue) RunErr(f func() error) error {
-	var e error
-	r.Run(func() {
-		e = f()
-	})
-	return e
-}
-
 func (r *RunQueue) Enqueue() {
 	if cap(r.queue) < 1 {
 		return
